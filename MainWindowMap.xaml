@@ -9,6 +9,5 @@
         Title="MainWindowMap" Height="450" Width="800">
     <Canvas>
         <mapsui:MapControl x:Name="mapControl" Width="800" Height="400"  />
-        <Button Width="100" Height="35" Content="Next Point" x:Name="NextButton" Canvas.Top="400" Click="NextButton_Click"></Button>
     </Canvas>
 </Window>
