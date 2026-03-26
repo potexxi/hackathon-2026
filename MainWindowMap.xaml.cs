@@ -37,31 +37,27 @@ namespace Hackathon
         {
             InitializeComponent();
             LoggingWidget.ShowLoggingInMap = ActiveMode.No;
+            mapControl.Map.Widgets.Clear();
+            Loaded += async (s, e) => await InitializeAsync();
+        }
 
-            double user_lon = 47.4125;
-            double user_lat = 9.7415;
+        private async Task InitializeAsync()
+        {
+            var (user_lat, user_lon) = await Class1.GetCoords();
             int user_radius = 1000;
             ServerData data = new ServerData(user_lat, user_lon, user_radius);
-            data.GetWater();
-            foreach(WaterEntry entry in data.entrys.results)
+            await data.GetWater();
+            foreach (WaterEntry entry in data.entrys.results)
             {
                 (double, double) tuple = (entry.lat, entry.lon);
                 locations.Add(tuple);
             }
             MapInitializen();
-            mapControl.Map.Widgets.Clear();
-            Loaded += async (s, e) => await InitializeAsync();
-        }
 
+            locations.Insert(0, (user_lat, user_lon)); // eigene Position als Startpunkt
 
-        private async Task InitializeAsync()
-        {
-            // Koordinaten holen
-            var (lat, lon) = await Class1.GetCoords();
-            locations.Insert(0, (lon, lat)); // eigene Position als Startpunkt
-
-            double bearing = CalculateBearing(locations[0].Item2, locations[0].Item1,
-                                              locations[1].Item2, locations[1].Item1);
+            double bearing = CalculateBearing(locations[0].Item1, locations[0].Item2,
+                                              locations[1].Item1, locations[1].Item2);
 
             MicrobitController _microbit = new MicrobitController();
             _microbit.Connect("COM16");
@@ -86,7 +82,7 @@ namespace Hackathon
 
             foreach ((double,double) i in locations )
             {            
-                features.Add(new MapPunkte(i.Item1, i.Item2, "blue").PunktErstellen());
+                features.Add(new MapPunkte(i.Item2, i.Item1, "blue").PunktErstellen());
             }
             features.Add(new MapPunkte(9.7415, 47.4125, "red").PunktErstellen());
 

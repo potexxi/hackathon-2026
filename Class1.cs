@@ -11,7 +11,7 @@ namespace Hackathon
 {
     internal class Class1
     {
-        public static async Task<Tuple<double, double>> GetCoords()
+        public static async Task<(double lat, double lon)> GetCoords()
         {
             using var client = new HttpClient();
             client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0");
@@ -22,16 +22,18 @@ namespace Hackathon
             htmlDoc.LoadHtml(html);
 
             var codeBlock = htmlDoc.DocumentNode.SelectSingleNode("//code");
-            string jsonText = codeBlock.InnerText;
+
+            string jsonText = System.Net.WebUtility.HtmlDecode(codeBlock.InnerText);
 
             using var data = JsonDocument.Parse(jsonText);
-            var root = data.RootElement;
+            var location = data.RootElement.GetProperty("location");
 
-            double lat = double.Parse(root.GetProperty("location").GetProperty("latitude").ToString());
-            double lon = double.Parse(root.GetProperty("location").GetProperty("longitude").ToString());
+            double lat = double.Parse(location.GetProperty("latitude").GetString(),
+                                      System.Globalization.CultureInfo.InvariantCulture);
+            double lon = double.Parse(location.GetProperty("longitude").GetString(),
+                                      System.Globalization.CultureInfo.InvariantCulture);
 
-            Tuple<double, double> returning = new Tuple<double, double>(lon, lat);
-            return returning;
+            return (lat, lon);
         }
     }
 }
