@@ -29,6 +29,11 @@ namespace Hackathon
         public MainWindowMap()
         {
             InitializeComponent();
+
+            
+            
+
+
             LoggingWidget.ShowLoggingInMap = ActiveMode.No;
             Map map = new Map();
             // OSM-Tile-Layer
