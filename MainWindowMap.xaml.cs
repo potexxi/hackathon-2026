@@ -30,6 +30,7 @@ namespace Hackathon
     /// </summary>
     public partial class MainWindowMap : Window
     {
+        public MicrobitController _microbit = new MicrobitController();
         public List<(double, double)> locations = new List<(double, double)>();
         public int next = 0;
         public int punkte = 0;
@@ -60,7 +61,7 @@ namespace Hackathon
             double bearing = CalculateBearing(locations[0].Item1, locations[0].Item2,
                                               locations[1].Item1, locations[1].Item2);
 
-            MicrobitController _microbit = new MicrobitController();
+            _microbit.Disconnect();
             _microbit.Connect("COM16");
             _microbit.SendAngle(bearing);
         }
@@ -116,8 +117,11 @@ namespace Hackathon
         private void NextButton_Click(object sender, RoutedEventArgs e)
         {
           
-            CalculateBearing(locations[0].Item2, locations[0].Item1, locations[next % (punkte - 1)].Item2, locations[next % (punkte - 1)].Item1);          
+            double bearing = CalculateBearing(locations[0].Item2, locations[0].Item1, locations[next % (punkte - 1)].Item2, locations[next % (punkte - 1)].Item1);          
             next++;
+            _microbit.Disconnect();
+            _microbit.Connect("COM16");
+            _microbit.SendAngle(bearing);
         }
     }
 }
