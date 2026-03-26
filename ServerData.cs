@@ -1,6 +1,4 @@
-﻿using Microsoft.Maui.Devices.Sensors;
-using Microsoft.Maui.Essentials;
-using Renci.SshNet;
+﻿using Renci.SshNet;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,6 +9,7 @@ using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Threading.Tasks;
+using Geolocation;
 
 namespace Hackathon
 {
@@ -34,32 +33,6 @@ namespace Hackathon
             //var client = new HttpClient();
             //var json = await client.GetStringAsync("https://ipapi.co/json/");
             //var data = JsonSerializer.Deserialize<GeoIp>(json);
-
-            try
-            {
-                var location = await Geolocation.GetLastKnownLocationAsync();
-
-                if (location == null)
-                    location = await Geolocation.GetLocationAsync(new GeolocationRequest
-                    {
-                        DesiredAccuracy = GeolocationAccuracy.High,
-                        Timeout = TimeSpan.FromSeconds(10)
-                    });
-
-                if (location != null)
-                {
-                    Console.WriteLine($"Latitude: {location.Latitude}");
-                    Console.WriteLine($"Longitude: {location.Longitude}");
-                }
-                else
-                {
-                    Console.WriteLine("GPS konnte keine Position ermitteln.");
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Fehler: {ex.Message}");
-            }
         }
 
         public static ServerData GetData()
