@@ -27,5 +27,15 @@ namespace Hackathon
             mwm = new MainWindowMap();
             mwm.ShowDialog();
         }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+        }
+
+        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            TabGuide.Width = (GridMain.ActualWidth - 5) / 2;
+            TabMap.Width = (GridMain.ActualWidth - 5) / 2;
+        }
     }
 }

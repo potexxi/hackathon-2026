@@ -5,22 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hackathon"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <TabControl >
-            <TabItem Header="Guide">
+        Title="MainWindow" Height="450" Width="800"
+        Loaded="Window_Loaded"
+        SizeChanged="Window_SizeChanged">
+    <Grid x:Name="GridMain">
+        <TabControl>
+            <TabItem x:Name ="TabGuide" Header="Guide">
                 <Grid Background="#FFE5E5E5">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="299*"/>
-                        <ColumnDefinition Width="495*"/>
-                    </Grid.ColumnDefinitions>
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="TabMap" Header ="Map" HorizontalAlignment ="Center">
+                <Grid Background="#FFE5E5E5">
                     <Button Content="go to water filter" HorizontalAlignment="Left" Margin="10,24,0,0" VerticalAlignment="Top" Height="66" Width="109" Click="Button_Click"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="TabItem">
-                <Grid Background="#FFE5E5E5"/>
-            </TabItem>
         </TabControl>
-
     </Grid>
 </Window>
