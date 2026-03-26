@@ -11,7 +11,7 @@ namespace Hackathon
     {
         private SerialPort _port;
 
-        public bool Connect(string portName = "COM16")
+        public bool Connect(string portName = "COM3")
         {
             try
             {

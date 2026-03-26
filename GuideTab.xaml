@@ -5,11 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hackathon"
         mc:Ignorable="d"
-        Title="GuideTab" Height="450" Width="600">
+        Title="GuideTab" Height="450" Width="800">
     <Grid>
-        <Button Content="Back" HorizontalAlignment="Center" Margin="0,339,0,0" VerticalAlignment="Top" Height="65" Width="470" Click="Button_Click"/>
-        <Label x:Name ="Titel" Content="TITEL" FontSize="30" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,32,0,0" VerticalAlignment="Top" Height="60" Width="580"/>
-        <Label x:Name ="SubTitel" Content="SUB TEXT" HorizontalAlignment="Center" Margin="0,138,0,0" VerticalAlignment="Top" Height="196" Width="580"/>
-        <Label x:Name ="Text" Content="Label" FontSize="15" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,74,0,0" VerticalAlignment="Top" Height="64" Width="562"/>
+        <Rectangle HorizontalAlignment="Center" Height="113" Stroke="Black" VerticalAlignment="Top" Width="800" Fill="LightGray"/>
+        <Button FontSize="40" FontWeight="Bold" Content="Back" HorizontalAlignment="Center" Margin="0,285,0,0" VerticalAlignment="Top" Height="97" Width="470" Click="Button_Click"/>
+        <Label x:Name ="Titel" FontSize="35" Content="TITEL" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,32,0,0" VerticalAlignment="Top" Height="60" Width="532"/>
+        <Label x:Name ="SubTitel" FontSize="11" Content="SUB TEXT" HorizontalAlignment="Center" Margin="0,175,0,0" VerticalAlignment="Top" Height="105" Width="658"/>
+        <Label x:Name ="Text" Content="Label" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,129,0,0" VerticalAlignment="Top" Height="71" Width="658"/>
     </Grid>
 </Window>
