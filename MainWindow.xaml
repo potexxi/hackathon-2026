@@ -20,9 +20,17 @@
                             <TextBox Width="700"/>
                         </StackPanel>
                         <StackPanel x:Name="StackPannelGuides" Background="Red" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                            <ScrollViewer x:Name="ScrawllBarGuides" HorizontalAlignment="Right">
-                                <StackPanel VerticalAlignment="Center">
-                                    <GuideEntry:GuideEntry Width="1000" Height="100" />
+                            <ScrollViewer x:Name="ScrawllBarGuides">
+                                <StackPanel>
+                                    <GuideEntry:GuideEntry Height="100" Margin="0,0,0,8"/>
+                                    <GuideEntry:GuideEntry Height="100" Margin="0,0,0,8"/>
+                                    <GuideEntry:GuideEntry Height="100" Margin="0,0,0,8"/>
+                                    <GuideEntry:GuideEntry Height="100" Margin="0,0,0,8"/>
+                                    <GuideEntry:GuideEntry Height="100" Margin="0,0,0,8"/>
+                                    <GuideEntry:GuideEntry Height="100" Margin="0,0,0,8"/>
+                                    <GuideEntry:GuideEntry Height="100" Margin="0,0,0,8"/>
+                                    <GuideEntry:GuideEntry Height="100" Margin="0,0,0,8"/>
+                                    <GuideEntry:GuideEntry Height="100" Margin="0,0,0,8"/>
                                 </StackPanel>
                             </ScrollViewer>
                         </StackPanel>
