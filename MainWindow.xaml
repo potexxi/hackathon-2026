@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:Hackathon"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Canvas>
-        <TabControl Height="434" Width="450">
+    <Grid>
+        <TabControl>
             <TabItem Header="TabItem">
                 <Grid Background="#FFE5E5E5"/>
             </TabItem>
@@ -16,5 +16,5 @@
             </TabItem>
         </TabControl>
 
-    </Canvas>
+    </Grid>
 </Window>
