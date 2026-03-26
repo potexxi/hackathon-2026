@@ -9,27 +9,19 @@
         Title="MainWindow" Height="450" Width="800"
         Loaded="Window_Loaded"
         SizeChanged="Window_SizeChanged">
-    
+
     <Grid x:Name="GridMain">
         <TabControl>
             <TabItem x:Name ="TabGuide" Header="Guide">
                 <Grid Background="#FFE5E5E5">
                     <StackPanel Orientation="Vertical">
-                        <StackPanel Orientation="Horizontal" Background="Gray">
-                            <Label Content="Search" FontWeight="Bold"/>
-                            <TextBox Width="700"/>
+                        <StackPanel Orientation="Horizontal" Background="Gray" Height="40" VerticalAlignment="Center">
+                            <Label Margin="0,6,0,0" Content="Search" FontWeight="Bold"/>
+                            <TextBox Width="700" Height=" 20"/>
                         </StackPanel>
-                        <StackPanel x:Name="StackPannelGuides" Background="Red" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <StackPanel x:Name="StackPannelGuides" HorizontalAlignment="Stretch" Margin="20" Height="340">
                             <ScrollViewer x:Name="ScrawllBarGuides">
                                 <StackPanel>
-                                    <GuideEntry:GuideEntry Height="100" Margin="0,0,0,8"/>
-                                    <GuideEntry:GuideEntry Height="100" Margin="0,0,0,8"/>
-                                    <GuideEntry:GuideEntry Height="100" Margin="0,0,0,8"/>
-                                    <GuideEntry:GuideEntry Height="100" Margin="0,0,0,8"/>
-                                    <GuideEntry:GuideEntry Height="100" Margin="0,0,0,8"/>
-                                    <GuideEntry:GuideEntry Height="100" Margin="0,0,0,8"/>
-                                    <GuideEntry:GuideEntry Height="100" Margin="0,0,0,8"/>
-                                    <GuideEntry:GuideEntry Height="100" Margin="0,0,0,8"/>
                                     <GuideEntry:GuideEntry Height="100" Margin="0,0,0,8"/>
                                 </StackPanel>
                             </ScrollViewer>
@@ -37,7 +29,7 @@
                     </StackPanel>
                 </Grid>
             </TabItem>
-            
+
             <TabItem x:Name="TabMap" Header ="Map" HorizontalAlignment ="Center">
                 <Grid Background="#FFE5E5E5">
                     <Button Content="go to water filter" HorizontalAlignment="Left" Margin="10,24,0,0" VerticalAlignment="Top" Height="66" Width="109" Click="Button_Click"/>
