@@ -12,6 +12,7 @@
     <PackageReference Include="Mapsui" Version="5.0.2" />
     <PackageReference Include="Mapsui.Tiling" Version="5.0.2" />
     <PackageReference Include="Mapsui.Wpf" Version="5.0.2" />
+    <PackageReference Include="SSH.NET" Version="2025.1.0" />
   </ItemGroup>
 
 </Project>
