@@ -31,7 +31,7 @@ namespace Hackathon
     public partial class MainWindowMap : Window
     {
         public List<(double, double)> locations = new List<(double, double)>();
-        public int next = 1;
+        public int next = 0;
         public int punkte = 0;
         public MainWindowMap()
         {
@@ -44,9 +44,10 @@ namespace Hackathon
         private async Task InitializeAsync()
         {
             var (user_lat, user_lon) = await Class1.GetCoords();
-            int user_radius = 10000;
+            int user_radius = 200;
             ServerData data = new ServerData(user_lat, user_lon, user_radius);
             await data.GetWater();
+            punkte = data.entrys.count;
             foreach (WaterEntry entry in data.entrys.results)
             {
                 (double, double) tuple = (entry.lat, entry.lon);
@@ -114,8 +115,9 @@ namespace Hackathon
 
         private void NextButton_Click(object sender, RoutedEventArgs e)
         {
+          
+            CalculateBearing(locations[0].Item2, locations[0].Item1, locations[next % (punkte - 1)].Item2, locations[next % (punkte - 1)].Item1);          
             next++;
-            CalculateBearing(locations[0].Item2, locations[0].Item1, locations[next].Item2, locations[next].Item1);
         }
     }
 }
