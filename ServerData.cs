@@ -10,6 +10,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Threading.Tasks;
 using Geolocation;
+using Windows.Devices.Geolocation;
 
 namespace Hackathon
 {
@@ -33,6 +34,21 @@ namespace Hackathon
             //var client = new HttpClient();
             //var json = await client.GetStringAsync("https://ipapi.co/json/");
             //var data = JsonSerializer.Deserialize<GeoIp>(json);
+
+            var accessStatus = await Geolocator.RequestAccessAsync();
+
+            if (accessStatus == GeolocationAccessStatus.Allowed)
+            {
+                var geolocator = new Geolocator { DesiredAccuracyInMeters = 10 };
+                Geoposition pos = await geolocator.GetGeopositionAsync();
+
+                Console.WriteLine($"Latitude: {pos.Coordinate.Point.Position.Latitude}");
+                Console.WriteLine($"Longitude: {pos.Coordinate.Point.Position.Longitude}");
+            }
+            else
+            {
+                Console.WriteLine("Kein Zugriff auf Standort erlaubt.");
+            }
         }
 
         public static ServerData GetData()
