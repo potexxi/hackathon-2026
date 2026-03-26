@@ -50,12 +50,24 @@ namespace Hackathon
             }
             MapInitializen();
             mapControl.Map.Widgets.Clear();
-            double bearing = CalculateBearing(locations[0].Item2, locations[0].Item1, locations[1].Item2, locations[1].Item1);    
-            MicrobitController _microbit = new MicrobitController();         
-            _microbit.Connect("COM16");             
-            _microbit.SendAngle(bearing); 
+            Loaded += async (s, e) => await InitializeAsync();
         }
-        
+
+
+        private async Task InitializeAsync()
+        {
+            // Koordinaten holen
+            var (lat, lon) = await Class1.GetCoords();
+            locations.Insert(0, (lon, lat)); // eigene Position als Startpunkt
+
+            double bearing = CalculateBearing(locations[0].Item2, locations[0].Item1,
+                                              locations[1].Item2, locations[1].Item1);
+
+            MicrobitController _microbit = new MicrobitController();
+            _microbit.Connect("COM16");
+            _microbit.SendAngle(bearing);
+        }
+
 
         public void MapInitializen()
         {

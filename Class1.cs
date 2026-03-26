@@ -1,18 +1,17 @@
-﻿using System;
+﻿using HtmlAgilityPack;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
-using HtmlAgilityPack;
 
 namespace Hackathon
 {
-    public class get_coords
+    internal class Class1
     {
-
-        static async Task<Tuple<double, double>> GetCoords()
+        public static async Task<Tuple<double, double>> GetCoords()
         {
             using var client = new HttpClient();
             client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0");
@@ -28,10 +27,10 @@ namespace Hackathon
             using var data = JsonDocument.Parse(jsonText);
             var root = data.RootElement;
 
-            double lat = double.Parse( root.GetProperty("location").GetProperty("latitude").ToString());
+            double lat = double.Parse(root.GetProperty("location").GetProperty("latitude").ToString());
             double lon = double.Parse(root.GetProperty("location").GetProperty("longitude").ToString());
 
-            Tuple<double, double> returning = new Tuple<double, double>(lon, lat);  
+            Tuple<double, double> returning = new Tuple<double, double>(lon, lat);
             return returning;
         }
     }
