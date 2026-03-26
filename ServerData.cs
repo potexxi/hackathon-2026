@@ -1,11 +1,16 @@
-﻿using System;
+﻿using Microsoft.Maui.Devices.Sensors;
+using Microsoft.Maui.Essentials;
+using Renci.SshNet;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using Renci.SshNet;
+using System.Threading.Tasks;
 
 namespace Hackathon
 {
@@ -17,6 +22,45 @@ namespace Hackathon
         public double Lat {  get; private set; }
         public double Lon { get; private set; }
         public ServerData() { }
+
+        public class GeoIp
+        {
+            public double latitude { get; set; }
+            public double longitude { get; set; }
+        }
+
+        async public static void SendData()
+        {
+            //var client = new HttpClient();
+            //var json = await client.GetStringAsync("https://ipapi.co/json/");
+            //var data = JsonSerializer.Deserialize<GeoIp>(json);
+
+            try
+            {
+                var location = await Geolocation.GetLastKnownLocationAsync();
+
+                if (location == null)
+                    location = await Geolocation.GetLocationAsync(new GeolocationRequest
+                    {
+                        DesiredAccuracy = GeolocationAccuracy.High,
+                        Timeout = TimeSpan.FromSeconds(10)
+                    });
+
+                if (location != null)
+                {
+                    Console.WriteLine($"Latitude: {location.Latitude}");
+                    Console.WriteLine($"Longitude: {location.Longitude}");
+                }
+                else
+                {
+                    Console.WriteLine("GPS konnte keine Position ermitteln.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Fehler: {ex.Message}");
+            }
+        }
 
         public static ServerData GetData()
         {
