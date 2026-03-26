@@ -33,7 +33,7 @@ namespace Hackathon
 
             // Startposition (Wien)
             var position = SphericalMercator.FromLonLat(16.3738, 48.2082);
-            mapControl.Map.Navigator.FlyTo(position, 9, long);
+            
             
 
         }
