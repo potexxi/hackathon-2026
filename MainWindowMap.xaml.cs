@@ -31,10 +31,11 @@ namespace Hackathon
     public partial class MainWindowMap : Window
     {
         public List<(double, double)> locations = new List<(double, double)>();
+        public int next = 1;
+        public int punkte = 0;
         public MainWindowMap()
         {
             InitializeComponent();
-
             LoggingWidget.ShowLoggingInMap = ActiveMode.No;       
             locations.Add((9.7415, 47.4125));
             locations.Add((9.7424, 50.4125));
@@ -43,8 +44,7 @@ namespace Hackathon
             locations.Add((8.7414, 47.4129));
             MapInitializen();
             mapControl.Map.Widgets.Clear();
-            double bearing = CalculateBearing(locations[0].Item2, locations[0].Item1, locations[1].Item2, locations[1].Item1);
-            bearing = CalculateBearing(locations[0].Item2, locations[0].Item1, locations[2].Item2, locations[2].Item1);
+            double bearing = CalculateBearing(locations[0].Item2, locations[0].Item1, locations[1].Item2, locations[1].Item1);    
             MicrobitController _microbit = new MicrobitController();         
             _microbit.Connect("COM16");             
             _microbit.SendAngle(bearing); 
@@ -104,5 +104,10 @@ namespace Hackathon
             return (bearing + 360) % 360;
         }
 
+        private void NextButton_Click(object sender, RoutedEventArgs e)
+        {
+            next++;
+            CalculateBearing(locations[0].Item2, locations[0].Item1, locations[next].Item2, locations[next].Item1);
+        }
     }
 }

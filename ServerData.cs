@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Hackathon
 {
@@ -27,9 +28,17 @@ namespace Hackathon
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
             var client = new HttpClient();
-            var response = await client.PostAsync("http://10.72.8.55:8000/water/nearby", content);
+            var response = await client.PostAsync("http://172.23.166.43:8000/water/nearby", content);
 
             string result = await response.Content.ReadAsStringAsync();
+
+            //string fixedJson = JsonSerializer.Deserialize<string>(result);
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            };
+            WaterEntrys entrys = JsonSerializer.Deserialize<WaterEntrys>(result, options);
+            MessageBox.Show($"{entrys.found}");
             
         }
     }
