@@ -36,12 +36,18 @@ namespace Hackathon
         public MainWindowMap()
         {
             InitializeComponent();
-            LoggingWidget.ShowLoggingInMap = ActiveMode.No;       
-            locations.Add((9.7415, 47.4125));
-            locations.Add((9.7424, 50.4125));
-            locations.Add((9.7413, 40.4134));
-            locations.Add((10.7410, 47.4124));
-            locations.Add((8.7414, 47.4129));
+            LoggingWidget.ShowLoggingInMap = ActiveMode.No;
+
+            double user_lon = 9.7415;
+            double user_lat = 47.4125;
+            int user_radius = 1000;
+            ServerData data = new ServerData(user_lat, user_lon, user_radius);
+            data.GetWater();
+            foreach(WaterEntry entry in data.entrys.results)
+            {
+                (double, double) tuple = (entry.lat, entry.lon);
+                locations.Add(tuple);
+            }
             MapInitializen();
             mapControl.Map.Widgets.Clear();
             double bearing = CalculateBearing(locations[0].Item2, locations[0].Item1, locations[1].Item2, locations[1].Item1);    
@@ -68,10 +74,10 @@ namespace Hackathon
 
             foreach ((double,double) i in locations )
             {            
-                features.Add(new MapPunkte(i.Item1, i.Item2).PunktErstellen());
+                features.Add(new MapPunkte(i.Item1, i.Item2, "blue").PunktErstellen());
             }
+            features.Add(new MapPunkte(9.7415, 47.4125, "red").PunktErstellen());
 
-            
 
 
             foreach (var f in features)
