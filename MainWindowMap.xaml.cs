@@ -44,7 +44,7 @@ namespace Hackathon
         private async Task InitializeAsync()
         {
             var (user_lat, user_lon) = await Class1.GetCoords();
-            int user_radius = 1000;
+            int user_radius = 10000;
             ServerData data = new ServerData(user_lat, user_lon, user_radius);
             await data.GetWater();
             foreach (WaterEntry entry in data.entrys.results)
@@ -78,25 +78,19 @@ namespace Hackathon
             var features = new List<IFeature>();
 
             List<MapPunkte> mapPunkte = new List<MapPunkte>();
+            var (user_lat, user_lon) = locations[0];
+            locations.RemoveAt(0);
             
 
-            foreach ((double,double) i in locations )
+            foreach ((double,double) i in locations)
             {            
                 features.Add(new MapPunkte(i.Item2, i.Item1, "blue").PunktErstellen());
             }
-            features.Add(new MapPunkte(9.7415, 47.4125, "red").PunktErstellen());
+            features.Add(new MapPunkte(user_lon, user_lat, "red").PunktErstellen());
 
 
 
-            foreach (var f in features)
-            {
-                f.Styles.Add(new SymbolStyle
-                {
-                    SymbolScale = 0.3,
-                    Fill = new Mapsui.Styles.Brush(new Mapsui.Styles.Color(255, 0, 0))
-                });
-            }
-
+            
             var layer = new MemoryLayer
             {
                 Features = features,
