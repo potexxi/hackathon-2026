@@ -38,14 +38,7 @@ namespace Hackathon
             InitializeComponent();
             LoggingWidget.ShowLoggingInMap = ActiveMode.No;
             mapControl.Map.Widgets.Clear();
-<<<<<<< HEAD
-            double bearing = CalculateBearing(locations[0].Item2, locations[0].Item1, locations[2].Item2, locations[2].Item1);    
-            MicrobitController _microbit = new MicrobitController();         
-            _microbit.Connect("COM3");             
-            _microbit.SendAngle(bearing); 
-=======
             Loaded += async (s, e) => await InitializeAsync();
->>>>>>> 37a7fc0b8f57bc47897aca2dbd5a75eee2828cb7
         }
 
         private async Task InitializeAsync()
@@ -87,17 +80,17 @@ namespace Hackathon
             List<MapPunkte> mapPunkte = new List<MapPunkte>();
             var (user_lat, user_lon) = locations[0];
             locations.RemoveAt(0);
-            
 
-            foreach ((double,double) i in locations)
-            {            
+
+            foreach ((double, double) i in locations)
+            {
                 features.Add(new MapPunkte(i.Item2, i.Item1, "blue").PunktErstellen());
             }
             features.Add(new MapPunkte(user_lon, user_lat, "red").PunktErstellen());
 
 
 
-            
+
             var layer = new MemoryLayer
             {
                 Features = features,
@@ -115,7 +108,7 @@ namespace Hackathon
             double x = Math.Sin(dLon) * Math.Cos(lat2);
             double y = Math.Cos(lat1) * Math.Sin(lat2) - Math.Sin(lat1) * Math.Cos(lat2) * Math.Cos(dLon);
 
-            double bearing = Math.Atan2(x, y) * 180 / Math.PI;         
+            double bearing = Math.Atan2(x, y) * 180 / Math.PI;
             return (bearing + 360) % 360;
         }
 
