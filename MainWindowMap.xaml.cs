@@ -7,6 +7,7 @@ using Mapsui.Tiling;
 using Mapsui.UI.Wpf;
 using Mapsui.Widgets;
 using Mapsui.Widgets.InfoWidgets;
+using NetTopologySuite.Geometries;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,14 +30,25 @@ namespace Hackathon
     /// </summary>
     public partial class MainWindowMap : Window
     {
+        public List<(double, double)> locations = new List<(double, double)>();
         public MainWindowMap()
         {
             InitializeComponent();
 
-            LoggingWidget.ShowLoggingInMap = ActiveMode.No;           
+            LoggingWidget.ShowLoggingInMap = ActiveMode.No;       
+            locations.Add((9.7415, 47.4125));
+            locations.Add((9.7424, 50.4125));
+            locations.Add((9.7413, 47.4134));
+            locations.Add((9.7410, 47.4124));
+            locations.Add((9.7414, 47.4129));
             MapInitializen();
             mapControl.Map.Widgets.Clear();
+            double bearing = CalculateBearing(locations[0].Item2, locations[0].Item1, locations[1].Item2, locations[1].Item1);
+            MicrobitController _microbit = new MicrobitController();         
+            _microbit.Connect("COM16");             
+            _microbit.SendAngle(bearing); 
         }
+        
 
         public void MapInitializen()
         {
@@ -45,17 +57,20 @@ namespace Hackathon
 
             mapControl.Map = map;
             var position = SphericalMercator.FromLonLat(9.7415, 47.4125);
-            mapControl.Map.Navigator.OverrideZoomBounds = new MMinMax(10, 1000);
+            mapControl.Map.Navigator.OverrideZoomBounds = new MMinMax(1, 10000);
             mapControl.Map.Navigator.CenterOn(position.x, position.y);
-            mapControl.Map.Navigator.ZoomTo(10);
+            mapControl.Map.Navigator.ZoomTo(1);
             var features = new List<IFeature>();
 
-            MapPunkte mapPunkte1 = new MapPunkte(9.7415, 47.4125);
-            MapPunkte mapPunkte2 = new MapPunkte(9.2415, 47.0125);
-            MapPunkte mapPunkte3 = new MapPunkte(10.415, 48.4125);
-            features.Add(mapPunkte1.PunktErstellen());
-            features.Add(mapPunkte2.PunktErstellen());
-            features.Add(mapPunkte3.PunktErstellen());
+            List<MapPunkte> mapPunkte = new List<MapPunkte>();
+            
+
+            foreach ((double,double) i in locations )
+            {            
+                features.Add(new MapPunkte(i.Item1, i.Item2).PunktErstellen());
+            }
+
+            
 
 
             foreach (var f in features)
@@ -74,5 +89,20 @@ namespace Hackathon
             };
             mapControl.Map.Layers.Add(layer);
         }
+
+        public double CalculateBearing(double fromLat, double fromLon, double toLat, double toLon)
+        {
+            double lat1 = fromLat * Math.PI / 180;
+            double lat2 = toLat * Math.PI / 180;
+            double dLon = (toLon - fromLon) * Math.PI / 180;
+
+            double x = Math.Sin(dLon) * Math.Cos(lat2);
+            double y = Math.Cos(lat1) * Math.Sin(lat2) - Math.Sin(lat1) * Math.Cos(lat2) * Math.Cos(dLon);
+
+            double bearing = Math.Atan2(x, y) * 180 / Math.PI;
+            MessageBox.Show($"{(bearing + 360) % 360 }");
+            return (bearing + 360) % 360;
+        }
+
     }
 }
