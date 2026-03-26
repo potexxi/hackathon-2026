@@ -30,17 +30,15 @@ namespace Hackathon
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
             var client = new HttpClient();
-            var response = await client.PostAsync("http://172.23.166.43:8000/water/nearby", content);
+            var response = await client.PostAsync("http://10.72.8.47:8000/water/nearby", content);
 
             string result = await response.Content.ReadAsStringAsync();
 
-            //string fixedJson = JsonSerializer.Deserialize<string>(result);
             var options = new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true
             };
             entrys = JsonSerializer.Deserialize<WaterEntrys>(result, options);
-            
         }
     }
 }

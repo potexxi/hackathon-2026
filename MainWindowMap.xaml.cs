@@ -38,8 +38,8 @@ namespace Hackathon
             InitializeComponent();
             LoggingWidget.ShowLoggingInMap = ActiveMode.No;
 
-            double user_lon = 9.7415;
-            double user_lat = 47.4125;
+            double user_lon = 47.4125;
+            double user_lat = 9.7415;
             int user_radius = 1000;
             ServerData data = new ServerData(user_lat, user_lon, user_radius);
             data.GetWater();
