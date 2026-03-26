@@ -44,12 +44,8 @@ namespace Hackathon
             mapControl.Map.Navigator.CenterOn(position.x, position.y);
             mapControl.Map.Navigator.ZoomTo(10);
 
-            var lon = 9.7415; var lat = 47.4125;
-            var point = SphericalMercator.FromLonLat(lon, lat);
-            var feature = new PointFeature(point);
-            feature.Styles.Add(new SymbolStyle { SymbolType = SymbolType.Ellipse, Fill = new Mapsui.Styles.Brush(new Mapsui.Styles.Color(255, 0, 0)), SymbolScale = 0.3, Outline = new Mapsui.Styles.Pen { Color = new Mapsui.Styles.Color(255, 255, 255, 0), Width = 0 } });
-            var layer = new MemoryLayer { Features = new[] { feature }, Style=null };
-            mapControl.Map.Layers.Add(layer);
+            
+            
            
 
         }
