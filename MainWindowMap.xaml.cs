@@ -1,5 +1,7 @@
 ﻿using Mapsui;
+using Mapsui.Layers;
 using Mapsui.Projections;
+using Mapsui.Styles;
 using Mapsui.Tiling;
 using Mapsui.UI.Wpf;
 using Mapsui.Widgets;
@@ -54,6 +56,12 @@ namespace Hackathon
             // Zoom setzen (z. B. 1000 = näher, 10000000 = weiter raus)
             mapControl.Map.Navigator.ZoomTo(10);
 
+            var lon = 9.7415; var lat = 47.4125;
+            var point = SphericalMercator.FromLonLat(lon, lat);
+            var feature = new PointFeature(point);
+            feature.Styles.Add(new SymbolStyle { SymbolType = SymbolType.Ellipse, Fill = new Mapsui.Styles.Brush(new Mapsui.Styles.Color(255, 0, 0)), SymbolScale = 0.2, Outline = new Mapsui.Styles.Pen { Color = new Mapsui.Styles.Color(255, 255, 255, 0), Width = 0 } });
+            var layer = new MemoryLayer { Features = new[] { feature }, Style=null };
+            mapControl.Map.Layers.Add(layer);
 
 
         }
