@@ -36,20 +36,41 @@ namespace Hackathon
         public MainWindowMap()
         {
             InitializeComponent();
-            LoggingWidget.ShowLoggingInMap = ActiveMode.No;       
-            locations.Add((9.7415, 47.4125));
-            locations.Add((9.7424, 50.4125));
-            locations.Add((9.7413, 40.4134));
-            locations.Add((10.7410, 47.4124));
-            locations.Add((8.7414, 47.4129));
-            MapInitializen();
+            LoggingWidget.ShowLoggingInMap = ActiveMode.No;
             mapControl.Map.Widgets.Clear();
+<<<<<<< HEAD
             double bearing = CalculateBearing(locations[0].Item2, locations[0].Item1, locations[2].Item2, locations[2].Item1);    
             MicrobitController _microbit = new MicrobitController();         
             _microbit.Connect("COM3");             
             _microbit.SendAngle(bearing); 
+=======
+            Loaded += async (s, e) => await InitializeAsync();
+>>>>>>> 37a7fc0b8f57bc47897aca2dbd5a75eee2828cb7
         }
-        
+
+        private async Task InitializeAsync()
+        {
+            var (user_lat, user_lon) = await Class1.GetCoords();
+            int user_radius = 10000;
+            ServerData data = new ServerData(user_lat, user_lon, user_radius);
+            await data.GetWater();
+            foreach (WaterEntry entry in data.entrys.results)
+            {
+                (double, double) tuple = (entry.lat, entry.lon);
+                locations.Add(tuple);
+            }
+            MapInitializen();
+
+            locations.Insert(0, (user_lat, user_lon)); // eigene Position als Startpunkt
+
+            double bearing = CalculateBearing(locations[0].Item1, locations[0].Item2,
+                                              locations[1].Item1, locations[1].Item2);
+
+            MicrobitController _microbit = new MicrobitController();
+            _microbit.Connect("COM16");
+            _microbit.SendAngle(bearing);
+        }
+
 
         public void MapInitializen()
         {
@@ -64,25 +85,19 @@ namespace Hackathon
             var features = new List<IFeature>();
 
             List<MapPunkte> mapPunkte = new List<MapPunkte>();
+            var (user_lat, user_lon) = locations[0];
+            locations.RemoveAt(0);
             
 
-            foreach ((double,double) i in locations )
+            foreach ((double,double) i in locations)
             {            
-                features.Add(new MapPunkte(i.Item1, i.Item2).PunktErstellen());
+                features.Add(new MapPunkte(i.Item2, i.Item1, "blue").PunktErstellen());
             }
+            features.Add(new MapPunkte(user_lon, user_lat, "red").PunktErstellen());
+
+
 
             
-
-
-            foreach (var f in features)
-            {
-                f.Styles.Add(new SymbolStyle
-                {
-                    SymbolScale = 0.3,
-                    Fill = new Mapsui.Styles.Brush(new Mapsui.Styles.Color(255, 0, 0))
-                });
-            }
-
             var layer = new MemoryLayer
             {
                 Features = features,
