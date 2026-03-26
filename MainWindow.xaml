@@ -22,6 +22,7 @@
                         <StackPanel x:Name="StackPannelGuides" HorizontalAlignment="Stretch" Margin="20" Height="340">
                             <ScrollViewer x:Name="ScrawllBarGuides">
                                 <StackPanel>
+                                <StackPanel x:Name="StackPanellGuideEntry">
                                     <GuideEntry:GuideEntry x:Name="Entry1" Height="100" Margin="0,0,0,8" />
                                 </StackPanel>
                             </ScrollViewer>

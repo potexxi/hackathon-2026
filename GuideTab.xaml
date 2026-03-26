@@ -8,9 +8,8 @@
         Title="GuideTab" Height="450" Width="300">
     <Grid>
         <Button Content="Back" HorizontalAlignment="Center" Margin="0,339,0,0" VerticalAlignment="Top" Height="65" Width="252" Click="Button_Click"/>
-        <Label Content="TITEL" FontSize="30" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,32,0,0" VerticalAlignment="Top" Height="60" Width="252"/>
-        <Label Content="SUB TEXT" HorizontalAlignment="Left" Margin="38,143,0,0" VerticalAlignment="Top" Height="167" Width="252"/>
-        <Label Content="Label" FontSize="15" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,74,0,0" VerticalAlignment="Top" Height="64" Width="252"/>
-
+        <Label x:Name ="Titel" Content="TITEL" FontSize="30" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,32,0,0" VerticalAlignment="Top" Height="60" Width="252"/>
+        <Label x:Name ="SubTitel" Content="SUB TEXT" HorizontalAlignment="Center" Margin="0,138,0,0" VerticalAlignment="Top" Height="196" Width="228"/>
+        <Label x:Name ="Text" Content="Label" FontSize="15" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,74,0,0" VerticalAlignment="Top" Height="64" Width="252"/>
     </Grid>
 </Window>

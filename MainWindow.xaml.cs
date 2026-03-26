@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Hackathon
 {
@@ -20,6 +21,8 @@ namespace Hackathon
         public MainWindow()
         {
             InitializeComponent();
+            GuideEntry se = new GuideEntry("Hungry", "I am Hungry", "I AM HANGRYI AM HANGRYI AM HANGRYI AM HANGRYI AM HANGRYI AM HANGRYI AM HANGRY");
+            StackPanellGuideEntry.Children.Add(se);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
