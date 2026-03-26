@@ -7,6 +7,6 @@
         mc:Ignorable="d"
         Title="WindowWaterFilter" Height="450" Width="800">
     <Grid>
-        ds
+        
     </Grid>
 </Window>
