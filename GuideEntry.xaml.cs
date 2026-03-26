@@ -20,17 +20,29 @@ namespace Hackathon
     /// </summary>
     public partial class GuideEntry : UserControl
     {
+        string Titel = "Titel";
+        string SubTitel = "SubTitel";
+        string Text = "Text";
         GuideTab gt;
         public GuideEntry()
         {
             InitializeComponent();
+        }
+        public GuideEntry(string titel, string subtitel, string text)
+        {
+            InitializeComponent();
+            this.Titel = titel;
+            this.SubTitel = subtitel;
+            this.Text = text;
+            LabelSubtext.Content = SubTitel;
+            LabelTitel.Content = Titel;
         }
 
         private void Rectangle_MouseLeave(object sender, MouseEventArgs e)
         {
             LabelTitel.Content = new TextBlock
             {
-                Text = "How to find water"
+                Text = Titel
             };
         }
 
@@ -39,14 +51,14 @@ namespace Hackathon
 
             LabelTitel.Content = new TextBlock
             {
-                Text = "How to find water",
+                Text = Titel,
                 TextDecorations = TextDecorations.Underline
             };
         }
 
         private void Rectangle_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            gt = new GuideTab();
+            gt = new GuideTab(this.Titel, this.SubTitel, this.Text);
             gt.ShowDialog();
         }
     }

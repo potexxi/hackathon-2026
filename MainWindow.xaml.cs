@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Hackathon
 {
@@ -20,7 +21,7 @@ namespace Hackathon
         public MainWindow()
         {
             InitializeComponent();
-            ServerData.GetData();
+            HandelGuide hq = new HandelGuide(StackPanellGuideEntry);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -39,7 +40,6 @@ namespace Hackathon
             TabMap.Width = (GridMain.ActualWidth - 5) / 2;
             StackPannelGuides.Height = GridMain.ActualHeight - 100;
             ScrawllBarGuides.Height = GridMain.ActualHeight - 100;
-            Entry1.Width = GridMain.ActualWidth - 120;
         }
     }
 }
