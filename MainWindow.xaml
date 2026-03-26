@@ -7,9 +7,15 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <TabControl>
-            <TabItem Header="TabItem">
-                <Grid Background="#FFE5E5E5"/>
+        <TabControl >
+            <TabItem Header="Guide">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="299*"/>
+                        <ColumnDefinition Width="495*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Content="go to water filter" HorizontalAlignment="Left" Margin="10,24,0,0" VerticalAlignment="Top" Height="66" Width="109" Click="Button_Click"/>
+                </Grid>
             </TabItem>
             <TabItem Header="TabItem">
                 <Grid Background="#FFE5E5E5"/>

@@ -16,10 +16,16 @@ namespace Hackathon
     /// </summary>
     public partial class MainWindow : Window
     {
+        MainWindowMap mwm;
         public MainWindow()
         {
             InitializeComponent();
-            
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            mwm = new MainWindowMap();
+            mwm.ShowDialog();
         }
     }
 }
