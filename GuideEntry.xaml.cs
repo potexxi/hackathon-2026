@@ -31,5 +31,15 @@ namespace Hackathon
             gt = new GuideTab();
             gt.ShowDialog();
         }
+
+        private void Rectangle_PreviewDragEnter(object sender, DragEventArgs e)
+        {
+            MessageBox.Show("Entry");
+        }
+
+        private void Rectangle_PreviewDragLeave(object sender, DragEventArgs e)
+        {
+            MessageBox.Show("Exit");
+        }
     }
 }

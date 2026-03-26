@@ -9,7 +9,11 @@
     <Grid>
         <Rectangle  Height="100" Fill="White" RadiusX="20" RadiusY="20"/>
         <Label x:Name="LabelTitel" Content="How to find water" FontSize="25" FontWeight="Bold" Margin="26,0,-26,0"/>
+        <Label x:Name="LabelTitel" Content="How to find water" FontSize="25" FontWeight="Bold" Margin="26,0,-26,0">
+        </Label>
+
         <Label Content="SubtextSubtextSubtextSubtextSubtextSubtextSubtextSubtextSubtexttextSubtextSubtextSubtextSubtextSubtextSubtextSubtextSubt" Margin="66,40,103,0" RenderTransformOrigin="0.5,0.5"/>
         <Rectangle Height="100" PreviewMouseLeftButtonDown="Rectangle_PreviewMouseLeftButtonDown" Fill="Transparent"/>
+        <Rectangle Height="100" PreviewMouseLeftButtonDown="Rectangle_PreviewMouseLeftButtonDown" PreviewDragEnter="Rectangle_PreviewDragEnter" PreviewDragLeave="Rectangle_PreviewDragLeave" Fill="Transparent"/>
     </Grid>
 </UserControl>
