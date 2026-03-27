@@ -90,7 +90,7 @@ namespace Hackathon
         private async Task InitializeAsync()
         {
             var (user_lat, user_lon) = await Class1.GetCoords();
-            int user_radius = 200;
+            int user_radius = 10000;
             ServerData data = new ServerData(user_lat, user_lon, user_radius);
             await data.GetWater();
             punkte = data.entrys.count;
@@ -158,7 +158,7 @@ namespace Hackathon
             double bearing = CalculateBearing(locations[0].Item2, locations[0].Item1,
                                               locations[next % (punkte - 1)].Item2,
                                               locations[next % (punkte - 1)].Item1);
-            next++;
+            next++;           
             _microbit.Disconnect();
             _microbit.Connect("COM16");
             _microbit.SendAngle(bearing);
