@@ -38,5 +38,5 @@ The hackathon is an 8-hour competition where teams develop a project, prototype,
 
 ## Hackathon Link
 
-[Hackathon-Link](https://www.instagram.com/htl_vlbg_hackathon_2026/)
+https://www.instagram.com/htl_vlbg_hackathon_2026/
 
