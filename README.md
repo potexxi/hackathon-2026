@@ -2,6 +2,9 @@
 
 This project was created at the **Vorarlberg Hackathon 2026**.
 
+**Important**
+*Since we use a private server to calculate water sources, you cannot try it yourself. Therefore, there is no public release.*
+
 ---
 
 ## Hackathon
